@@ -14,3 +14,13 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/demo0528?characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
     username: root
     password: root
+
+connection:
+  readOnly: false
+  connectionTimeout: 30000
+  idleTimeout: 600000
+  maxLifetime: 1800000
+  maximumPoolSize: 100
+  minimumIdle: 1
+  autoCommit: false
+  connectionTestQuery: SELECT 1
