@@ -26,6 +26,11 @@ public class TransactionManagementConfig implements TransactionManagementConfigu
         return new DataSourceTransactionManager(dataSource);
     }
 
+    @Bean(name = "bTransactionManager")
+    public DataSourceTransactionManager bTransactionManager(@Qualifier("bDataSource") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return annotationTransactionManager;

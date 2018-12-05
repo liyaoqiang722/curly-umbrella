@@ -23,23 +23,22 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableConfigurationProperties(BaseDataSourceConfig.class)
-@MapperScan(basePackages = {"com.wj.spc.demo_1203.mysql.dao"}, sqlSessionTemplateRef = "sqlSessionTemplate")
-public class MybatisConfig {
+@MapperScan(basePackages = {"com.wj.spc.demo_1203.dao.bMapper"}, sqlSessionTemplateRef = "bSqlSessionTemplate")
+public class MybatisBConfig {
 
     @Autowired
     private BaseDataSourceConfig baseDataSourceConfig;
 
-    @Value("${spring.datasource.url}")
+    @Value("${spring.datasource.secondary.url}")
     private String jdbcUrl;
 
-    @Value("${spring.datasource.password}")
+    @Value("${spring.datasource.secondary.password}")
     private String password;
 
-    @Value("${spring.datasource.username}")
+    @Value("${spring.datasource.secondary.username}")
     private String username;
 
-    @Bean(name = "dataSource")
-    @Primary
+    @Bean(name = "bDataSource")
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
 
@@ -59,20 +58,18 @@ public class MybatisConfig {
 
     }
 
-    @Bean(name = "sqlSessionFactory")
-    @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "bSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("bDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mappers/*.xml"));
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/bMappers/*.xml"));
 
         return sessionFactory.getObject();
     }
 
-    @Bean(name = "sqlSessionTemplate")
-    @Primary
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = "bSqlSessionTemplate")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("bSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

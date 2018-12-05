@@ -10,10 +10,15 @@ spring:
 spring:
   profiles: develop
   datasource:
-    name: develop
-    url: jdbc:mysql://127.0.0.1:3306/demo0528?characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
+    primary:
+      name: develop
+      url: jdbc:mysql://127.0.0.1:3306/demo0528?characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+    secondary:
+      url: jdbc:mysql://127.0.0.1:3306/curly_umbrella?characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
 
 connection:
   readOnly: false
