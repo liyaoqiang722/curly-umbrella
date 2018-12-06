@@ -1,6 +1,8 @@
 package com.wj.spc.demo_1203.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String id;
     private String userName;

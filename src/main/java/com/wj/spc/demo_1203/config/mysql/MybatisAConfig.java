@@ -23,7 +23,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableConfigurationProperties(BaseDataSourceConfig.class)
-@MapperScan(basePackages = {"com.wj.spc.demo_1203.dao.aMapper"}, sqlSessionTemplateRef = "sqlSessionTemplate")
+@MapperScan(basePackages = {"com.wj.spc.demo_1203.dao.mapper.aMapper"}, sqlSessionTemplateRef = "sqlSessionTemplate")
 public class MybatisAConfig {
 
     @Autowired
