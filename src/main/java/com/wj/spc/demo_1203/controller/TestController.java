@@ -1,5 +1,6 @@
 package com.wj.spc.demo_1203.controller;
 
+import com.wj.spc.demo_1203.domain.Province;
 import com.wj.spc.demo_1203.domain.User;
 import com.wj.spc.demo_1203.servuice.TestService;
 import com.wj.spc.demo_1203.viewModel.Result;
@@ -43,6 +44,20 @@ public class TestController {
             method = RequestMethod.GET)
     public Object test03(){
         User user = testService.dataSource2();
+
+        SuccessResponse successResponse = new SuccessResponse<>();
+        Result result = new Result();
+        result.setCode(0);
+        successResponse.setResult(result);
+        successResponse.setData(user);
+
+        return successResponse;
+    }
+
+    @RequestMapping(value = "/test04",
+            method = RequestMethod.GET)
+    public Object test04(){
+        List<Province> user = testService.dataSource3();
 
         SuccessResponse successResponse = new SuccessResponse<>();
         Result result = new Result();

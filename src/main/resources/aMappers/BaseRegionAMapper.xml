@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wj.spc.demo_1203.dao.mapper.aMapper.BaseRegionAMapper">
+
+    <select id="getProvince" resultType="com.wj.spc.demo_1203.domain.Province">
+        select
+          province_id as id,
+          province as province
+        from
+          base_region
+
+    </select>
+
+    <select id="getCity" resultType="com.wj.spc.demo_1203.domain.City">
+        select
+          city_id as id,
+          city as city
+        from
+          base_region
+        where
+          province_id = #{provinceId}
+          and level = 3
+        group by city_id
+        order by city_id
+    </select>
+
+</mapper>
