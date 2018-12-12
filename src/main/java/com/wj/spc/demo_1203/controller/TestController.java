@@ -5,6 +5,9 @@ import com.wj.spc.demo_1203.domain.User;
 import com.wj.spc.demo_1203.servuice.TestService;
 import com.wj.spc.demo_1203.viewModel.Result;
 import com.wj.spc.demo_1203.viewModel.SuccessResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +57,12 @@ public class TestController {
         return successResponse;
     }
 
+    /**
+     * DiscoveryClient可以注入从注册中心获取的服务相关信息。
+     */
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
     @RequestMapping(value = "/test04",
             method = RequestMethod.GET)
     public Object test04(){
@@ -64,6 +73,8 @@ public class TestController {
         result.setCode(0);
         successResponse.setResult(result);
         successResponse.setData(user);
+
+        List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances("service1");
 
         return successResponse;
     }
