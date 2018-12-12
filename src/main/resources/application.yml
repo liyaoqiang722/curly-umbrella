@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: service1
+    name: service_curly_umbrella
   profiles:
     active: develop
 
