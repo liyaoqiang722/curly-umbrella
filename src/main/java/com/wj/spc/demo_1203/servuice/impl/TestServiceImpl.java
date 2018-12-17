@@ -1,5 +1,6 @@
 package com.wj.spc.demo_1203.servuice.impl;
 
+import com.wj.spc.demo_1203.commons.constants.EmailType;
 import com.wj.spc.demo_1203.dao.mapper.aMapper.AMapper;
 import com.wj.spc.demo_1203.dao.mapper.aMapper.BaseRegionAMapper;
 import com.wj.spc.demo_1203.dao.mapper.bMapper.BMapper;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -96,6 +99,17 @@ public class TestServiceImpl implements TestService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void enumSetTest01() {
+        EnumSet enumSet = EnumSet.allOf(EmailType.class);
+        int i = 1;
+        Iterator setIt = enumSet.iterator();
+        while (setIt.hasNext()){
+            log.info("第"+ i + "个元素为：" + setIt.next().toString());
+            i++;
         }
     }
 }

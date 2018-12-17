@@ -78,4 +78,20 @@ public class TestController {
 
         return successResponse;
     }
+
+    /**
+     * EnumSet。
+     */
+    @RequestMapping(value = "/test/enumSet01",
+            method = RequestMethod.GET)
+    public Object enumSetTest01(){
+        testService.enumSetTest01();
+
+        SuccessResponse successResponse = new SuccessResponse<>();
+        Result result = new Result();
+        result.setCode(0);
+        successResponse.setResult(result);
+
+        return successResponse;
+    }
 }

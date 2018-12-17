@@ -12,4 +12,6 @@ public interface TestService {
     User dataSource2();
 
     List<Province> dataSource3();
+
+    void enumSetTest01();
 }
