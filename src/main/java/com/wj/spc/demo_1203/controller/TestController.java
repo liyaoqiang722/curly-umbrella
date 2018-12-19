@@ -82,7 +82,7 @@ public class TestController {
     /**
      * EnumSet。
      */
-    @RequestMapping(value = "/test/enumSet01",
+    @RequestMapping(value = "/enumSet01",
             method = RequestMethod.GET)
     public Object enumSetTest01(){
         testService.enumSetTest01();
