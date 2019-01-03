@@ -8,11 +8,16 @@ import com.wj.spc.demo_1203.viewModel.SuccessResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 @RestController
@@ -93,5 +98,30 @@ public class TestController {
         successResponse.setResult(result);
 
         return successResponse;
+    }
+
+    /**
+     * word Test
+     */
+    @RequestMapping(value = "/wordTest01",
+            method = RequestMethod.GET)
+    public void wordTest01(HttpServletResponse response) throws Exception{
+        ServletOutputStream out = null;
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = testService.getWordForJudgement();
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            response.addHeader("Content-Disposition", "attachment;filename=judgement.docx");
+            out = response.getOutputStream();
+            FileCopyUtils.copy(byteArrayInputStream, out);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+        }
     }
 }

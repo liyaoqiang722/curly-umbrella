@@ -1,6 +1,9 @@
 package com.wj.spc.demo_1203.servuice.impl;
 
 import com.wj.spc.demo_1203.commons.constants.EmailType;
+import com.wj.spc.demo_1203.commons.util.POIParagraph;
+import com.wj.spc.demo_1203.commons.util.POIWordUtils;
+import com.wj.spc.demo_1203.commons.util.Paragraph;
 import com.wj.spc.demo_1203.dao.mapper.aMapper.AMapper;
 import com.wj.spc.demo_1203.dao.mapper.aMapper.BaseRegionAMapper;
 import com.wj.spc.demo_1203.dao.mapper.bMapper.BMapper;
@@ -10,12 +13,15 @@ import com.wj.spc.demo_1203.domain.Province;
 import com.wj.spc.demo_1203.domain.User;
 import com.wj.spc.demo_1203.servuice.TestService;
 import javafx.concurrent.Task;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -111,5 +117,53 @@ public class TestServiceImpl implements TestService {
             log.info("第"+ i + "个元素为：" + setIt.next().toString());
             i++;
         }
+    }
+
+    @Override
+    public ByteArrayOutputStream getWordForJudgement() throws Exception {
+        XWPFDocument doc = new XWPFDocument(this.getClass().getResourceAsStream("/downloadTemplate/template.docx"));
+
+        List<POIParagraph> paragraphs = getPOIParagraphs();
+        POIWordUtils.generateWordFromParagraph(doc, paragraphs);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        doc.write(byteArrayOutputStream);
+        byteArrayOutputStream.close();
+
+        return byteArrayOutputStream;
+    }
+
+    private List<POIParagraph> getPOIParagraphs() {
+        List<POIParagraph> paragraphs = new ArrayList<>();
+        //todo 根据generateWordFile中逻辑在POIWordUtils增加相应的方法。生成paragraph并添加到paragraphs中
+        POIWordUtils.addTitleParagraph(paragraphs, "word测试0103");
+        //文书副标题－文书类型
+        POIWordUtils.addSubtitleParagraph(paragraphs, "民事判决书");
+        //正文
+        StringBuffer judgmentDate = new StringBuffer();
+        StringBuffer secretary = new StringBuffer();
+        List<String> trialMen = new ArrayList<>();
+        //输出正文，拼接出落款所需内容
+            for (int i = 0; i < 10; i++) {
+                String text = "测试啊啊啊啊啊啊啊" + i;
+                POIWordUtils.addBodyParagraph(paragraphs, text);
+            }
+
+        POIWordUtils.addEndingParagraph(paragraphs, "\r");
+        POIWordUtils.addEndingParagraph(paragraphs, "\r");
+        POIWordUtils.addEndingParagraph(paragraphs, "\r");
+
+        if (trialMen.size() > 0) {
+            trialMen.forEach(trialMan -> {
+                try {
+                    POIWordUtils.addEndingParagraph(paragraphs, trialMan);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        POIWordUtils.addEndingParagraph(paragraphs, judgmentDate.toString());
+        POIWordUtils.addEndingParagraph(paragraphs, secretary.toString());
+        return paragraphs;
     }
 }
