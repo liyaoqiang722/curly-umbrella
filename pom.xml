@@ -114,11 +114,18 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-		<!--jsoup-->
+		<!--jsoup  下载word用到 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.11.3</version>
+		</dependency>
+
+		<!--zookeeper    apache开发的zookeeper客户端-->
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-framework</artifactId>
+			<version>4.1.0</version>
 		</dependency>
 
 	</dependencies>

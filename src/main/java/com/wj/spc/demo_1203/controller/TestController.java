@@ -34,6 +34,10 @@ public class TestController {
     }
 
 
+    /**
+     * redis 测试
+     * @return
+     */
     @RequestMapping(value = "/test02",
             method = RequestMethod.GET)
     public Object test02(){
