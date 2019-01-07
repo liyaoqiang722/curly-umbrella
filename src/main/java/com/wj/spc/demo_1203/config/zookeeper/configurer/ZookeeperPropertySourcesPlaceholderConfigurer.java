@@ -1,3 +1,4 @@
+/*
 package com.wj.spc.demo_1203.config.zookeeper.configurer;
 
 import com.wj.spc.demo_1203.config.zookeeper.constants.ZookeeperConstants;
@@ -18,13 +19,13 @@ import org.springframework.core.env.Environment;
 
 import java.util.Properties;
 
+*/
 /**
  * Created by liyaoqiang on 2019/1/4.
- */
+ *//*
+
 @Configuration
 public class ZookeeperPropertySourcesPlaceholderConfigurer extends PropertySourcesPlaceholderConfigurer implements InitializingBean {
-
-    private String publishMode;
 
     private String connectionString;
 
@@ -35,7 +36,6 @@ public class ZookeeperPropertySourcesPlaceholderConfigurer extends PropertySourc
     @Override
     public void setEnvironment(Environment environment) {
         super.setEnvironment(environment);
-        //this.publishMode = environment.getProperty("zookeeper.publishMode");
         this.connectionString = environment.getProperty("zookeeper.connection");
         this.baseSleepTime = Integer.valueOf(environment.getProperty("zookeeper.baseSleepTime"));
         this.maxTries = Integer.valueOf(environment.getProperty("zookeeper.baseSleepTime"));
@@ -61,11 +61,7 @@ public class ZookeeperPropertySourcesPlaceholderConfigurer extends PropertySourc
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        /*if (null == publishMode) {
-            throw new RuntimeException("publish mode is not set");
-        }*/
-
+    public void afterPropertiesSet() {
         Properties props = new Properties();
         CuratorFramework curatorFramework = curatorFramework();
 
@@ -109,3 +105,4 @@ public class ZookeeperPropertySourcesPlaceholderConfigurer extends PropertySourc
     }
 
 }
+*/

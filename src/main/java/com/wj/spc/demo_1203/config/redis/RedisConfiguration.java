@@ -1,3 +1,4 @@
+/*
 package com.wj.spc.demo_1203.config.redis;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,9 +14,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
+*/
 /**
  * Created by liyaoqiang on 2018/12/6.
- */
+ *//*
+
 @Configuration
 public class RedisConfiguration {
 
@@ -28,11 +31,13 @@ public class RedisConfiguration {
     @Value("${spring.redis.password}")
     private String password;
 
-    /**
+    */
+/**
      * JedisConnectionFactory 中注入 redis host port password.
      *
      * @return JedisConnectionFactory对象
-     */
+     *//*
+
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(hostName, port);
@@ -50,11 +55,13 @@ public class RedisConfiguration {
         return new StringRedisSerializer();
     }
 
-    /**
+    */
+/**
      * RedisTemplate 中注入JedisConnectionFactory.
      *
      * @return RedisTemplate
-     */
+     *//*
+
     @Bean
     public RedisTemplate redisTemplate(@Qualifier("stringRedisSerializer") StringRedisSerializer stringRedisSerializer,
                                        @Qualifier("jedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
@@ -70,3 +77,4 @@ public class RedisConfiguration {
     }
 }
 
+*/
