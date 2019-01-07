@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class TestServiceImpl implements TestService {
@@ -165,5 +167,22 @@ public class TestServiceImpl implements TestService {
         POIWordUtils.addEndingParagraph(paragraphs, judgmentDate.toString());
         POIWordUtils.addEndingParagraph(paragraphs, secretary.toString());
         return paragraphs;
+    }
+
+    @Override
+    public void patternTest01() {
+        String text = "2013年1月，被申请人黄某某从礼来（中国）研发公司的服务2013年12月1日";
+
+        //Pattern p = Pattern.compile("(\\d{4})年(\\d{2})月(\\d{2})日");
+        Pattern p = Pattern.compile("((([0-9]{4})年([0-9]{2}|[1-9]))月([0-9]{2}|[1-9]))日|" +
+                "(([0-9]{4})年([0-9]{2}|[1-9]))月");
+        Matcher matcher = p.matcher(text);
+
+        if (matcher.find()) {  //判断文本是否找到符合规则字符串，并提取
+            String result =  matcher.group(0);
+            log.info("找到符合筛选规则的数据===" + result);
+            log.info("找到符合筛选规则的数据===" + matcher.group(1));
+        }
+        log.info("123");
     }
 }

@@ -17,4 +17,6 @@ public interface TestService {
     void enumSetTest01();
 
     ByteArrayOutputStream getWordForJudgement() throws Exception;
+
+    void patternTest01();
 }

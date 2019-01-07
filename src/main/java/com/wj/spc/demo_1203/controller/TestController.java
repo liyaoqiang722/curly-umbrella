@@ -128,4 +128,13 @@ public class TestController {
             }
         }
     }
+
+    /**
+     * Pattern Test
+     */
+    @RequestMapping(value = "/patternTest01",
+            method = RequestMethod.GET)
+    public void patternTest01() {
+        testService.patternTest01();
+    }
 }
