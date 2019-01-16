@@ -137,4 +137,13 @@ public class TestController {
     public void patternTest01() {
         testService.patternTest01();
     }
+
+    /**
+     * kafka Test
+     */
+    @RequestMapping(value = "/kafkaTest01",
+            method = RequestMethod.GET)
+    public void kafkaTest01() {
+        testService.kafkaTest01();
+    }
 }

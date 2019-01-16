@@ -3,7 +3,6 @@ package com.wj.spc.demo_1203.servuice.impl;
 import com.wj.spc.demo_1203.commons.constants.EmailType;
 import com.wj.spc.demo_1203.commons.util.POIParagraph;
 import com.wj.spc.demo_1203.commons.util.POIWordUtils;
-import com.wj.spc.demo_1203.commons.util.Paragraph;
 import com.wj.spc.demo_1203.dao.mapper.aMapper.AMapper;
 import com.wj.spc.demo_1203.dao.mapper.aMapper.BaseRegionAMapper;
 import com.wj.spc.demo_1203.dao.mapper.bMapper.BMapper;
@@ -11,13 +10,14 @@ import com.wj.spc.demo_1203.dao.mapper.bMapper.BaseRegionBMapper;
 import com.wj.spc.demo_1203.dao.redis.TestDao;
 import com.wj.spc.demo_1203.domain.Province;
 import com.wj.spc.demo_1203.domain.User;
+import com.wj.spc.demo_1203.servuice.SendService;
 import com.wj.spc.demo_1203.servuice.TestService;
-import javafx.concurrent.Task;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -184,5 +184,23 @@ public class TestServiceImpl implements TestService {
             log.info("找到符合筛选规则的数据===" + matcher.group(1));
         }
         log.info("123");
+    }
+
+    @Resource
+    private SendService sendService;
+
+    @Override
+    public void kafkaTest01() {
+
+        for (int i = 0; i < 3; i++) {
+            //调用消息发送类中的消息发送方法
+            sendService.send();
+
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -19,4 +19,6 @@ public interface TestService {
     ByteArrayOutputStream getWordForJudgement() throws Exception;
 
     void patternTest01();
+
+    void kafkaTest01();
 }
