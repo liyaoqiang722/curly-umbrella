@@ -37,14 +37,14 @@
     <!-- Enable FILE and STDOUT appenders for all LogService messages.
          By default, only LogService at level INFO and above. -->
     <!--INFO级别不会打印sql，DEBUG可以-->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
 
     <!-- For loggers in the these namespaces, LogService at all levels. -->
-    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework" level="DEBUG"/>
 
     <!--打印sql-->
-    <logger name="com.wj.spc.demo_1203.dao" level="INFO"/>
+    <logger name="com.wj.spc.demo_1203.dao" level="DEBUG"/>
 </configuration>
