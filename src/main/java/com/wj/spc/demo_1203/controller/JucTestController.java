@@ -5,6 +5,7 @@ import com.wj.spc.demo_1203.domain.User;
 import com.wj.spc.demo_1203.juc.FutureTaskTest01;
 import com.wj.spc.demo_1203.juc.ShengXiao01;
 import com.wj.spc.demo_1203.juc.ShengchanXiaofei02;
+import com.wj.spc.demo_1203.juc.SiSuoTest01;
 import com.wj.spc.demo_1203.servuice.TestService;
 import com.wj.spc.demo_1203.viewModel.Result;
 import com.wj.spc.demo_1203.viewModel.SuccessResponse;
@@ -258,7 +259,7 @@ public class JucTestController {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public static void main(String[] args ) throws ExecutionException, InterruptedException {
+    public static void xcc(String[] args ) throws ExecutionException, InterruptedException {
         // 固定容量 线程池 Executors.newFixedThreadPool
         /*
             执行结果：
@@ -361,5 +362,17 @@ public class JucTestController {
             // 注意：线程池使用完后，一定要进行销毁！！！
             newCachedThreadPool.shutdown();
         }
+    }
+
+
+    /**
+     * 死锁示例
+     * @param args
+     */
+    public static void main(String[] args ) {
+        String lockA = "lockA";
+        String lockB = "lockB";
+        new Thread(new SiSuoTest01(lockA, lockB), "Thread-A").start();
+        new Thread(new SiSuoTest01(lockB, lockA), "Thread-B").start();
     }
 }
