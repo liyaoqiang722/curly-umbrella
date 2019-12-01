@@ -2,10 +2,7 @@ package com.wj.spc.demo_1203.controller;
 
 import com.wj.spc.demo_1203.domain.Province;
 import com.wj.spc.demo_1203.domain.User;
-import com.wj.spc.demo_1203.juc.FutureTaskTest01;
-import com.wj.spc.demo_1203.juc.ShengXiao01;
-import com.wj.spc.demo_1203.juc.ShengchanXiaofei02;
-import com.wj.spc.demo_1203.juc.SiSuoTest01;
+import com.wj.spc.demo_1203.domain.juc.SiSuoTest01;
 import com.wj.spc.demo_1203.servuice.TestService;
 import com.wj.spc.demo_1203.viewModel.Result;
 import com.wj.spc.demo_1203.viewModel.SuccessResponse;
@@ -24,11 +21,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @RestController
 @RequestMapping("/test")

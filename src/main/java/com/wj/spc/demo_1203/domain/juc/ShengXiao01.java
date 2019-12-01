@@ -1,4 +1,4 @@
-package com.wj.spc.demo_1203.juc;
+package com.wj.spc.demo_1203.domain.juc;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
