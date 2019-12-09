@@ -2,6 +2,8 @@ package com.wj.spc.demo_1203.controller;
 
 import com.wj.spc.demo_1203.domain.Province;
 import com.wj.spc.demo_1203.domain.User;
+import com.wj.spc.demo_1203.domain.juc.FutureTaskTest01;
+import com.wj.spc.demo_1203.domain.juc.ShengchanXiaofei02;
 import com.wj.spc.demo_1203.domain.juc.SiSuoTest01;
 import com.wj.spc.demo_1203.servuice.TestService;
 import com.wj.spc.demo_1203.viewModel.Result;
@@ -181,7 +183,7 @@ public class JucTestController {
      * 生产者消费者完整版（阻塞队列版）
      * @param args
      */
-    /*public static void main(String[] args ) {
+    public static void duiliexiaofei(String[] args ) {
         ShengchanXiaofei02 shengchanXiaofei02 = new ShengchanXiaofei02(new ArrayBlockingQueue<>(5));
 
         new Thread(() -> {
@@ -211,7 +213,7 @@ public class JucTestController {
 
         shengchanXiaofei02.stop();
         System.out.println(Thread.currentThread().getName() + "停止！");
-    }*/
+    }
 
 
     /**
@@ -231,7 +233,7 @@ public class JucTestController {
      * 所以 FutureTask 完美的将 Callable 和 Runnable 进行了转换
      * @param args
      */
-    /*public static void main(String[] args ) throws ExecutionException, InterruptedException {
+    public static void futureTaskTest(String[] args ) throws ExecutionException, InterruptedException {
         FutureTask futureTask = new FutureTask(new FutureTaskTest01());
         new Thread(futureTask,"Thread-1").start();
 
@@ -242,7 +244,7 @@ public class JucTestController {
 
         }
         System.out.println(123);
-    }*/
+    }
 
 
     /**
@@ -361,10 +363,23 @@ public class JucTestController {
      * 死锁示例
      * @param args
      */
-    public static void main(String[] args ) {
+    public static void sisuo(String[] args ) {
         String lockA = "lockA";
         String lockB = "lockB";
         new Thread(new SiSuoTest01(lockA, lockB), "Thread-A").start();
         new Thread(new SiSuoTest01(lockB, lockA), "Thread-B").start();
+    }
+
+    /**
+     * 两线程轮询打印
+     * @param args
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    public static void lunxundayin(String[] args ) throws ExecutionException, InterruptedException {
+        FutureTask futureTask = new FutureTask(new FutureTaskTest01());
+        FutureTask futureTask2 = new FutureTask(new FutureTaskTest01());
+        new Thread(futureTask,"Thread-1").start();
+        new Thread(futureTask2,"Thread-2").start();
     }
 }

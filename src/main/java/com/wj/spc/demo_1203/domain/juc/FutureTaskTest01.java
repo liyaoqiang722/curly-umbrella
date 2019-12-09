@@ -7,8 +7,10 @@ public class FutureTaskTest01 implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        TimeUnit.SECONDS.sleep(5);
-        System.out.println("FutureTask调用！");
+        for (int i = 1;i<= 5;i++){
+            System.out.println(i + Thread.currentThread().getName());
+            TimeUnit.SECONDS.sleep(1);
+        }
         return 123;
     }
 }
